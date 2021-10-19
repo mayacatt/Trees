@@ -30,7 +30,9 @@ meta.data <- meta.data %>%
 str(meta.data)
 View(meta.data)
 length(unique(meta.data$Cultivar.Code))
-#134 total species
+#157 cultivar species
+length(unique(meta.data$Species.Code))
+#tot species =134
 
 Dawson <- meta.data[,c(6:7, 21, 10, 20, 12, 19, 14, 11)]
 View(Dawson)
@@ -53,12 +55,18 @@ write.csv(Dawson.key, file="output/Dawson.key.csv")
 
 Master <- read.csv("output/MASTER.DAWSON.csv", na.strings="NA")
 View(Master)
-
+str(Master)
+Master <- Master[, c(2:5,7:10,12)]
 Dawson.Native <- left_join(Dawson, Master)
 View(Dawson.Native)
 str(Dawson.Native)
 Dawson.Native <- Dawson.Native %>% 
   mutate(Native_SLL =as.factor(Native_SLL)) %>%
-  drop_na(Native_SLL)
+  drop_na(Native_SLL) %>%
+  subset(DBH >4.9)
+View(Dawson.Native)
+str(Dawson.Native)
+Dawson.Native <- Dawson.Native[, c(1:8,11, 9, 12:15)]
+View(Dawson.Native)
 
 write.csv(Dawson.Native, file="output/Dawson.Trees.With.Origin.csv")
