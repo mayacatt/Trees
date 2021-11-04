@@ -65,11 +65,12 @@ ETF.abund.site<-ddply(ETF.site.sp.matrix, ~X, function(x) {
 })
 ETF.abund.site$Region <- "ETF"
 sum(ETF.abund.site$ABUNDANCE_NAT)
+
 #Total trees per site
 Trees.per.site <- Dawson.trees.total[,4:5] %>%
   add_count(Site.Code) %>%
   distinct() %>%
-  rename("total.per.site"=n)
+  dplyr::rename("total.per.site"=n)
 View(Trees.per.site)
 
 #total trees per greenspace type 
@@ -90,10 +91,11 @@ tot.abund.site
 
 #Proportion SLL per site 
 
-SLL.tot.sp.abund <- left_join(tot.abund.site, SLL.abund.site, )
-SLL.tot.sp.abund[is.na(SLL.tot.sp.abund)]<-0
+SLL.tot.sp.abund <- left_join(tot.abund.site, SLL.abund.site)
+SLL.tot.sp.abund[is.na(SLL.tot.sp.abund)]<-'0'
 View(SLL.tot.sp.abund)
 SLL.tot.sp.abund$Proportions <- SLL.tot.sp.abund$ABUNDANCE_NAT/SLL.tot.sp.abund$ABUNDANCE_TOT
+SLL.tot.sp.abund$Region <- dplyr::recode(SLL.tot.sp.abund$Region, '0'="SLL")
 SLL.tot.sp.abund
 describe(SLL.tot.sp.abund$Proportions)
 
@@ -101,17 +103,15 @@ describe(SLL.tot.sp.abund$Proportions)
 
 ETF.tot.sp.abund <- left_join(tot.abund.site, ETF.abund.site)
 ETF.tot.sp.abund[is.na(ETF.tot.sp.abund)]<-0
+ETF.tot.sp.abund$Region
 ETF.tot.sp.abund$Proportions <- ETF.tot.sp.abund$ABUNDANCE_NAT/ETF.tot.sp.abund$ABUNDANCE_TOT
+ETF.tot.sp.abund$Region <- dplyr::recode(ETF.tot.sp.abund$Region, '0'="ETF")
 ETF.tot.sp.abund
 describe(ETF.tot.sp.abund$Proportions)
 str(ETF.tot.sp.abund)
 
 #proportions per site (SLL & ETF)
 prop.tot <- rbind(ETF.tot.sp.abund, SLL.tot.sp.abund)
-View(prop.tot)
-prop.tot <- prop.tot %>%
-  distinct()
-prop.tot$Region <- recode(prop.tot$Region, "0"="NON-NAT")
 View(prop.tot)
 write.csv(prop.tot, "output/prop.abund.tot.csv")
 
@@ -133,14 +133,23 @@ View(Dawson.proportions)
 install.packages("car")
 library(car)
 str(Dawson.proportions)
-glm.abundance <- glm(Proportion~ Site.Type+Region,weights=total.per.site, family=binomial, Dawson.proportions)
+hist(Dawson.proportions$Proportion)
+glm.abundance <- glm(Proportion~ Site.Type+Region,weights=total.per.site, family=quasibinomial, Dawson.proportions)
 anova(glm.abundance)
 Anova(glm.abundance)
 summary(glm.abundance)
 
-install.packages("emmeans")
-install.packages(c("mvtnorm","estimability","numDeriv","xtable","plyr","emmeans"))
+plot(glm.abundance)
+shapiro.test(residuals(glm.abundance))
+bptest(glm.abundance)
 
-Yes
+
 library(emmeans)
-lsmeans(glm.abundance, pairwise~Site.Type|Region, adjust=Tukey)
+lsmeans(glm.abundance, pairwise~Site.Type|Region, adjust="Tukey")
+
+
+PseudoR2(glm.b.richness, which = "Nagelkerke")
+
+PseudoR2(glm.b.abundance, which="Nagelkerke")
+
+

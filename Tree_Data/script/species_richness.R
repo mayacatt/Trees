@@ -5,14 +5,63 @@ library(tidyr)
 library(tidyverse)
 library(plyr)
 library(dplyr)
-install.packages("psych")
 library(psych)
+
 #total species richness/greenspacetype
 tot.sp.table <- read.csv("output/total.sp.mat.csv")
-pr.total<-ddply(total.sp.table, ~Var2, function(x) {
+pr.total<-ddply(tot.sp.table, ~X, function(x) {
   data.frame(RICHNESS= sum((x[-1]>0)))})
-names(pr.total)[names(pr.total)=='Var2'] <- 'GS.Type'
+names(pr.total)[names(pr.total)=='X'] <- 'GS.Type'
 pr.total
+
+#SLL sp richness/green space type 
+
+SLL.sp.matrix<- read.csv("output/SLL.sp.mat.csv")
+str(SLL.sp.matrix)
+View(SLL.sp.matrix)
+SLL.per.total<-ddply(SLL.sp.matrix, ~X, function(x) {
+  data.frame(RICHNESS_NAT= sum((x[-1]>0)))
+})
+SLL.per.total
+names(SLL.per.total)[names(SLL.per.total)=='X'] <- 'GS.Type'
+describe(SLL.per.total$RICHNESS_NAT)
+
+#ETF sp richness/green space type 
+
+ETF.sp.matrix<- read.csv("output/ETF.sp.mat.csv")
+str(ETF.sp.matrix)
+ETF.per.total<-ddply(ETF.sp.matrix, ~X, function(x) {
+  data.frame(RICHNESS_NAT= sum((x[-1]>0)))
+})
+names(ETF.per.total)[names(ETF.per.total)=='X'] <- 'GS.Type'
+describe(ETF.per.total$RICHNESS_NAT)
+
+#SLL PROP/GREEN SPACE
+
+SLL.rich.prop <- left_join(pr.total, SLL.per.total)
+SLL.rich.prop[is.na(SLL.rich.prop)] <-0
+View(SLL.rich.prop)
+SLL.rich.prop$Proportion <- SLL.rich.prop$RICHNESS_NAT/SLL.rich.prop$RICHNESS
+SLL.rich.prop$Region <- "SLL"
+str(SLL.rich.prop)
+SLL.rich.prop
+
+#ETF PROP/GREENSPACE
+ETF.rich.prop <- left_join(pr.total, ETF.per.total)
+ETF.rich.prop[is.na(ETF.rich.prop)] <-0
+ETF.rich.prop$Proportion <- ETF.rich.prop$RICHNESS_NAT/ETF.rich.prop$RICHNESS
+ETF.rich.prop$Region <- "ETF"
+str(ETF.rich.prop)
+
+#JOIN ETF AND SLL
+
+prop.rich.tot <- rbind(ETF.rich.prop, SLL.rich.prop)
+View(prop.rich.tot)
+prop.rich.tot <- prop.rich.tot %>%
+  distinct()
+prop.rich.tot$Region <- recode(prop.rich.tot$Region, "0"="NON-NAT")
+View(prop.rich.tot)
+write.csv(prop.rich.tot, "output/prop.rich.tot.csv")
 
 #total sp richness/site
 site.sp.table <- read.csv("output/site.sp.mat.csv")
@@ -31,23 +80,6 @@ SLL.per.site.total<-ddply(SLL.site.sp.matrix, ~X, function(x) {
 SLL.per.site.total
 describe(SLL.per.site.total$RICHNESS)
 
-#SLL.prop
-
-SLL.rich.prop <- left_join(per.site.total, SLL.per.site.total)
-SLL.rich.prop[is.na(SLL.rich.prop)] <-0
-SLL.rich.prop$Proportion <- SLL.rich.prop$RICHNESS_NAT/SLL.rich.prop$RICHNESS
-SLL.rich.prop$Site.Type <- substr(SLL.rich.prop$X, 1,1)
-SLL.rich.prop$Region <- "SLL"
-str(SLL.rich.prop)
-
-boxplot(Proportion~Site.Type, SLL.rich.prop
-        title="Native SLL Proportion per Green Space Type")
-
-library(ggplot2)
-
-SLL.prop <- ggplot(SLL.rich.prop, aes(Site.Type, Proportion))
-SLL.prop
-
 #ETF sp richness/site
 ETF.site.sp.matrix<- read.csv("output/ETF.site.sp.mat.csv")
 str(ETF.site.sp.matrix)
@@ -56,34 +88,33 @@ ETF.per.site.total<-ddply(ETF.site.sp.matrix, ~X, function(x) {
 })
 ETF.per.site.total
 describe(ETF.per.site.total$RICHNESS)
-#ETF richness / site
-ETF.rich.prop <- left_join(per.site.total, ETF.per.site.total)
-ETF.rich.prop[is.na(ETF.rich.prop)] <-0
-ETF.rich.prop$Proportion <- ETF.rich.prop$RICHNESS_NAT/ETF.rich.prop$RICHNESS
-ETF.rich.prop$Site.Type <- substr(ETF.rich.prop$X, 1,1)
-ETF.rich.prop$Region <- "ETF"
-str(ETF.rich.prop)
 
-#ETF.prop
+#SLL.prop
 
-ETF.rich.prop <- left_join(per.site.total, ETF.per.site.total)
-ETF.rich.prop[is.na(ETF.rich.prop)] <-0
-ETF.rich.prop$Proportion <- ETF.rich.prop$RICHNESS_NAT/ETF.rich.prop$RICHNESS
-ETF.rich.prop$Site.Type <- substr(ETF.rich.prop$X, 1,1)
-ETF.rich.prop$Region <- "ETF"
-str(SLL.rich.prop)
+SLL.rich.site.prop <- left_join(per.site.total, SLL.per.site.total)
+SLL.rich.site.prop[is.na(SLL.rich.site.prop)] <-0
+SLL.rich.site.prop$Proportion <- SLL.rich.site.prop$RICHNESS_NAT/SLL.rich.site.prop$RICHNESS
+SLL.rich.site.prop$Region <- "SLL"
+str(SLL.rich.site.prop)
+SLL.rich.site.prop
 
+#ETF PROP/SITE
+ETF.rich.site.prop <- left_join(per.site.total, ETF.per.site.total)
+ETF.rich.site.prop[is.na(ETF.rich.site.prop)] <-0
+ETF.rich.site.prop$Proportion <- ETF.rich.site.prop$RICHNESS_NAT/ETF.rich.site.prop$RICHNESS
+ETF.rich.site.prop$Region <- "ETF"
+ETF.rich.site.prop
+str(ETF.rich.site.prop)
 
 #JOIN ETF AND SLL
 
-prop.rich.tot <- rbind(ETF.rich.prop, SLL.rich.prop)
-View(prop.rich.tot)
-prop.rich.tot <- prop.rich.tot %>%
+prop.rich.site.tot <- rbind(ETF.rich.site.prop, SLL.rich.site.prop)
+View(prop.rich.site.tot)
+prop.rich.tot <- prop.rich.site.tot %>%
   distinct()
-prop.rich.tot <- dplyr::rename(prop.rich.tot, "Site.Code"=X)
-prop.rich.tot$Region <- recode(prop.rich.tot$Region, "0"="NON-NAT")
-View(prop.rich.tot)
-write.csv(prop.rich.tot, "output/prop.rich.tot.csv")
+prop.rich.site.tot <- dplyr::rename(prop.rich.site.tot, "Site.Code"=X)
+View(prop.rich.site.tot)
+write.csv(prop.rich.site.tot, "output/prop.rich.site.csv")
 
 #sp richness/park
 park.sp.table <- read.csv("output/parks.sp.mat.csv")
@@ -93,7 +124,8 @@ per.park.total<-ddply(park.sp.table,~X, function(x) {
 })
 per.park.total
 describe(per.park.total$RICHNESS)
-#sprichness/street
+
+#sp richness/street
 
 s.sp.table <- read.csv("output/s.sp.mat.csv")
 str(s.sp.table)
@@ -102,7 +134,7 @@ per.s.total<-ddply(s.sp.table,~X, function(x) {
 })
 per.s.total
 describe(per.s.total$RICHNESS)
-#sprichness/yard
+#sp richness/yard
 
 res.sp.table <- read.csv("output/res.sp.mat.csv")
 str(res.sp.table)
@@ -111,7 +143,7 @@ per.res.total<-ddply(res.sp.table, ~X, function(x) {
 })
 per.res.total
 describe(per.res.total$RICHNESS)
-#sprichness/institute
+#sp richness/institute
 
 ins.sp.table <- read.csv("output/ins.sp.mat.csv")
 str(ins.sp.table)
@@ -120,7 +152,7 @@ per.ins.total<-ddply(ins.sp.table,~X, function(x) {
 })
 per.ins.total
 describe(per.ins.total$RICHNESS)
-#sprichness/allyeyway
+#sp richness/allyeyway
 
 a.sp.table <- read.csv("output/a.sp.mat.csv")
 str(a.sp.table)

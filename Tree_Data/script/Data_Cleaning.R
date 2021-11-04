@@ -1,4 +1,4 @@
-install.packages("tidyverse")
+
 library(tidyverse)
 library(dplyr)
 library(magrittr)
@@ -44,7 +44,8 @@ str(Dawson.species)
 Dawson.species <- Dawson.species[,5:8]
 View(Dawson.species)
 str(Dawson.species)
-spp.key <- read.csv("input/MasterSppKey_KatiePhilp490_28-1-2021.csv")
+write.csv(Dawson.species, "output/dawson.species.list.csv")
+spp.key <- read.csv("input/MasterSppKey_NativeRegion.csv")
 str(spp.key)
 View(spp.key)
 str(spp.key)
