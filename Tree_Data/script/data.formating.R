@@ -1,5 +1,5 @@
 setwd("~/Documents/GitHub/Trees/Tree_Data")
-meta.csv <- read.csv("output/Dawson.Trees.With.Origin.csv")
+meta.csv <- read.csv("output/NDG_DAWSON_ORIGIN.csv")
 library(tidyverse)
 
 ##table that summarizes species by green space type
@@ -21,8 +21,7 @@ SLL.sp.df <- as.data.frame(SLL.sp.table)
 SLL.sp.wide <-spread(SLL.sp.df, "Var1", "Freq")
 rownames(SLL.sp.wide) <- SLL.sp.wide$Var2
 str(SLL.sp.wide)
-View(SLL.sp.wide)
-SLL.sp.mat <- SLL.sp.wide[, 2:50]
+SLL.sp.mat <- subset(SLL.sp.wide, select = -c(Var2))
 write.csv(SLL.sp.mat, file="output/SLL.sp.mat.csv")
 
 #ETF PER GREENSPACE TYPE
@@ -40,7 +39,7 @@ ETF.sp.df <- as.data.frame(ETF.sp.table)
 ETF.sp.wide <-spread(ETF.sp.df, "Var1", "Freq")
 rownames(ETF.sp.wide) <- ETF.sp.wide$Var2
 str(ETF.sp.wide)
-ETF.sp.mat <- ETF.sp.wide[, 2:64]
+ETF.sp.mat <- ETF.sp.wide[, 2:87]
 write.csv(ETF.sp.mat, file="output/ETF.sp.mat.csv")
 
 ##table that summarizes species by site code
@@ -70,20 +69,18 @@ ETF.site.sp.df<- as.data.frame(ETF.site.sp.table)
 ETF.site.sp.wide <- spread(ETF.site.sp.df, "Var1", "Freq")
 rownames(ETF.site.sp.wide) <- ETF.site.sp.wide$Var2
 ETF.site.sp.mat<-subset(ETF.site.sp.wide, select = -c(Var2))
-View(ETF.site.sp.mat)
 write.csv(ETF.site.sp.mat, file="output/ETF.site.sp.mat.csv")
 
 #table that summarizes private vs public (govenernance)
 
 m.sp.table <- table(meta.csv$Species.Code, meta.csv$Classification)
-write.csv(m.sp.table, file="output/m.sp.table.csv")
+write.csv(m.sp.table, file="output/gm.sp.table.csv")
 m.sp.df<- as.data.frame(m.sp.table)
 str(m.sp.df)
 m.sp.wide <- spread(m.sp.df, "Var1", "Freq")
 rownames(m.sp.wide) <- m.sp.table$Var2
-View(m.sp.table)
-str(m.sp.table)
-m.sp.mat <- m.sp.wide[, 2:131]
+str(m.sp.wide)
+m.sp.mat <- m.sp.wide[, 2:191]
 View(m.sp.mat)
 write.csv(m.sp.mat, file="output/m.sp.mat.csv")
 
@@ -95,9 +92,8 @@ m.SLL.sp.df<- as.data.frame(m.SLL.sp.table)
 str(m.SLL.sp.df)
 m.SLL.sp.wide <- spread(m.SLL.sp.df, "Var1", "Freq")
 rownames(m.SLL.sp.wide) <- m.SLL.sp.wide$Var2
-View(m.SLL.sp.table)
-str(m.SLL.sp.table)
-m.SLL.sp.mat <- m.SLL.sp.wide[, 2:49]
+str(m.SLL.sp.wide)
+m.SLL.sp.mat <- m.SLL.sp.wide[, 2:61]
 View(m.SLL.sp.mat)
 write.csv(m.SLL.sp.mat, file="output/m.SLL.sp.mat.csv")
 

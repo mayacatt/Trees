@@ -1,14 +1,17 @@
-Dawson.trees.total <- read.csv("output/Dawson.Trees.With.Origin.csv")
-View(Dawson.trees.total)
-str(Dawson.trees.total)
+trees.total <- read.csv("output/NDG_DAWSON_ORIGIN.csv")
+View(trees.total)
+str(trees.total)
 library(dplyr)
 library(plyr)
 library(psych)
-length(unique(Dawson.trees.total$Site.Code))
+library(car)
+library(DescTools)
+length(unique(trees.total$Site.Code))
+trees.total
 
 #SLL subset
 
-SLL.Species <- subset(Dawson.trees.total, Native_SLL=='Y', select=c(Site.Type, Site.Code))
+SLL.Species <- subset(trees.total, Native_SLL=='Y', select=c(Plot.code, Site.Type, Site.Code))
 SLL.Species <- SLL.Species %>% 
   add_count(Site.Code) %>%
   distinct()
@@ -38,15 +41,13 @@ SLL.abund.site$Region <- "SLL"
 sum(SLL.abund.site$ABUNDANCE_NAT)
 
 #ETF subset
-ETF.Species <- subset(Dawson.trees.total, Native_ETF=='Y',select=c(Site.Type, Site.Code))
+ETF.Species <- subset(trees.total, Native_ETF=='Y',select=c(Plot.code, Site.Type, Site.Code))
 ETF.Species <- ETF.Species %>%
   add_count(Site.Code) %>%
   distinct() %>%
   dplyr::rename("ETF.per.site"=n)
 ETF.Species$Region <- "ETF"
 View(ETF.Species)
-
-str(Dawson.trees.total)
 
 #ETF / GS TYPE
 ETF.sp.matrix<- read.csv("output/ETF.sp.mat.csv")
@@ -66,8 +67,10 @@ ETF.abund.site<-ddply(ETF.site.sp.matrix, ~X, function(x) {
 ETF.abund.site$Region <- "ETF"
 sum(ETF.abund.site$ABUNDANCE_NAT)
 
+str(trees.total)
+
 #Total trees per site
-Trees.per.site <- Dawson.trees.total[,4:5] %>%
+Trees.per.site <- trees.total[,c(3,6:7)] %>%
   add_count(Site.Code) %>%
   distinct() %>%
   dplyr::rename("total.per.site"=n)
@@ -96,7 +99,7 @@ SLL.tot.sp.abund[is.na(SLL.tot.sp.abund)]<-'0'
 View(SLL.tot.sp.abund)
 SLL.tot.sp.abund$Proportions <- SLL.tot.sp.abund$ABUNDANCE_NAT/SLL.tot.sp.abund$ABUNDANCE_TOT
 SLL.tot.sp.abund$Region <- dplyr::recode(SLL.tot.sp.abund$Region, '0'="SLL")
-SLL.tot.sp.abund
+str(SLL.tot.sp.abund)
 describe(SLL.tot.sp.abund$Proportions)
 
 #Proportions ETF / site 
@@ -119,37 +122,18 @@ write.csv(prop.tot, "output/prop.abund.tot.csv")
 
 SLL.proportions <- left_join(Trees.per.site, SLL.Species)
 SLL.proportions[is.na(SLL.proportions)] <- 0
-View(Native.proportions)
-str(Native.proportions)
 SLL.proportions$Proportion <- SLL.proportions$SLL.per.site/SLL.proportions$total.per.site
+SLL.proportions$Region <- dplyr::recode(SLL.proportions$Region, '0'="SLL")
+SLL.proportions
 
 ETF.proportions <- left_join(Trees.per.site, ETF.Species)
 ETF.proportions[is.na(ETF.proportions)] <-0
 ETF.proportions$Proportion <- ETF.proportions$ETF.per.site/ETF.proportions$total.per.site
+ETF.proportions$Region <- dplyr::recode(ETF.proportions$Region, '0'="ETF")
 
-Dawson.proportions <- merge(SLL.proportions, ETF.proportions, all=TRUE)
-View(Dawson.proportions)
+Native.proportions <- merge(SLL.proportions, ETF.proportions, all=TRUE)
+View(Native.proportions)
+write.csv(Native.proportions, "output/Native.abund.proportions.csv")
 
-install.packages("car")
-library(car)
-str(Dawson.proportions)
-hist(Dawson.proportions$Proportion)
-glm.abundance <- glm(Proportion~ Site.Type+Region,weights=total.per.site, family=quasibinomial, Dawson.proportions)
-anova(glm.abundance)
-Anova(glm.abundance)
-summary(glm.abundance)
-
-plot(glm.abundance)
-shapiro.test(residuals(glm.abundance))
-bptest(glm.abundance)
-
-
-library(emmeans)
-lsmeans(glm.abundance, pairwise~Site.Type|Region, adjust="Tukey")
-
-
-PseudoR2(glm.b.richness, which = "Nagelkerke")
-
-PseudoR2(glm.b.abundance, which="Nagelkerke")
 
 

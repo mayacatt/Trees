@@ -4,13 +4,11 @@ library(emmeans)
 library(lmtest)
 
 #summary stats
-meta <- read.csv("output/Dawson.Trees.With.Origin.csv")
-#View(meta)
-meta <- meta[,c(2:9, 10, 13:14)]
-#View(meta)
+meta <- read.csv("output/NDG_DAWSON_ORIGIN.csv")
 str(meta)
+#View(meta)
 
-Sites <- meta[, c(1:4)]
+Sites <- meta[, c(2:7)]
 View(Sites)
 Sites <- distinct(Sites)
 
@@ -23,6 +21,8 @@ Site.Rich[order(Site.Rich[,'Site.Code']), ]
 Meta.Rich <- dplyr::left_join(Sites, Site.Rich) 
 ETF.Rich <- subset(Site.Rich, Region=="ETF")
 sum(ETF.Rich$RICHNESS_NAT)
+
+
 Dawson.ETF.Rich <- subset(ETF.Rich, Site.Code=="I1")
 Dawson.ETF.Rich
 View(Dawson.ETF.Rich)
@@ -44,6 +44,8 @@ View(Meta.Abund)
 ETF.Abund <- subset(Sites.Abund, Region=="ETF")
 str(ETF.Abund)
 sum(ETF.Abund$ABUNDANCE_NAT)
+
+##Dawson abundance
 Dawson.ETF.Abund <- subset(ETF.Abund, Site.Code=="I1")
 sum(Dawson.ETF.Abund$ABUNDANCE_NAT)
 SLL.Abund <- subset(Sites.Abund, Region=="SLL")
@@ -66,10 +68,10 @@ sum(Meta.Rich$Proportion_RICH==0)
 sum(Meta.Rich$Proportion_RICH==1)
 
 #richness model
-glm.richness <- glm(Proportion_RICH~Site.Type*Region, data=Meta.Rich)
+glm.richness <- glm(Proportion_RICH~Plot.code+Site.Type+Region, data=Meta.Rich)
 glm.richness
 Anova(glm.richness)
-glm.b.richness <- glm(Proportion_RICH~Site.Type*Region, family=binomial(link="logit"), data=Meta.Rich, weights = RICHNESS)
+glm.b.richness <- glm(Proportion_RICH~Plot.code+Site.Type+Region, family=binomial(link="logit"), data=Meta.Rich, weights = RICHNESS)
 car::vif(glm.b.richness)
 summary(glm.b.richness)
 Anova(glm.b.richness)
@@ -84,18 +86,14 @@ qqline(residuals(glm.b.richness))
 
 #homogeneity
 bptest(glm.b.richness)
-library(emmeans)
+
 #pairwise comparisons
 lsmeans(glm.b.richness, pairwise ~ Site.Type | Region , adjust="Tukey")
+PseudoR2(glm.b.richness, which = "Nagelkerke")
 
 #abundance model
-aov.abundance <- aov(Proportion_ABUND~Site.Type*Region, data=Meta.Abund)
-anova(aov.abundance)
-plot(aov.abundance)
-shapiro.test(resid(aov.abundance))
-leveneTest(Proportion_ABUND~Site.Type*Region, data=Meta.Abund)
-Anova(glm.abundance)
-glm.b.abundance <- glm(Proportion_ABUND~Site.Type+Region, family=binomial, data=Meta.Abund, weights = ABUNDANCE_TOT)
+
+glm.b.abundance <- glm(Proportion_ABUND~Plot.code+Site.Type+Region, family=binomial, data=Meta.Abund, weights = ABUNDANCE_TOT)
 
 library(rsq)
 rsq(glm.b.abundance)
@@ -105,7 +103,7 @@ print(Anova(glm.b.abundance))
 hist(Meta.Abund$Proportion_ABUND)
 
 ##Assumptions
-plot(resid(glm.b.abundance))
+plot(glm.b.abundance)
 
 #normality
 shapiro.test(resid(glm.b.abundance))

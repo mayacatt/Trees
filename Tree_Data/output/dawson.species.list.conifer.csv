@@ -1,0 +1,158 @@
+Genus.Code,Species.Code,Cultivar.Code,Species.Latin,Equations,Type of Tree
+AB,ABBA,ABBA,Abies balsamea,,Conifer
+AC,ACFR,ACFR,Acer freemanii,,Deciduous
+AC,ACGI,ACGI,Acer ginnala,,Deciduous
+AC,ACNE,ACNE,Acer negundo,,Deciduous
+AC,ACNI,ACNIGC,Acer nigrum 'Green Column',,Deciduous
+AC,ACPA,ACPA,Acer palmatum,,Deciduous
+AC,ACPL,ACPL,Acer platanoides,,Deciduous
+AC,ACPL,ACPLCO,Acer platanoides 'Columnare',,Deciduous
+AC,ACPL,ACPLDE,Acer platanoides 'Deborah',,Deciduous
+AC,ACPL,ACPLEQ,Acer platanoides 'Emerald Queen',,Deciduous
+AC,ACRU,ACRU,Acer rubrum,,Deciduous
+AC,ACSA,ACSA,Acer saccharinum,,Deciduous
+AC,ACSA,ACSAPY,Acer saccharinum 'Pyramidalis',,Deciduous
+AC,ACSC,ACSC,Acer saccharum,,Deciduous
+AC,ACTA,ACTA,Acer tataricum,,Deciduous
+AC,ACFR,ACFRAB,Acer x freemanii 'Autumn Blaze',,Deciduous
+AE,AEGL,AEGL,Aesculus glabra,,Deciduous
+AE,AEHI,AEHI,Aesculus hippocastanum,,Deciduous
+AL,ALGL,ALGL,Alnus glutinosa,,Deciduous
+AM,AM,AM,Amelanchier,,Deciduous
+AM,AMAR,AMAR,Amelanchier arborea,,Deciduous
+AM,AMCA,AMCA,Amelanchier canadensis,,Deciduous
+AM,AMSA,AMSA,Amelanchier sanguinea,,Deciduous
+AM,AMGR,AMGR,Amelanchier x grandiflora,,Deciduous
+AM,AMGR,AMGRAB,Amelanchier x grandiflora 'Autumn Brillance',,Deciduous
+AR,ARSP,ARSP,Aralia Spinosa,,Deciduous
+BE,BENI,BENIHE,Betula nigra 'Heritage',,Deciduous
+BE,BEPA,BEPA,Betula papyrifera,,Deciduous
+BE,BEPE,BEPE,Betula pendula,,Deciduous
+BE,BEPO,BEPO,Betula populifolia,,Deciduous
+BR,BRPA,BRPA,Broussonetia papyrifera,,Deciduous
+CA,CAAB,CAAB,Caragana arborescens,,Deciduous
+CR,CRCO,CRCO,Carya cordiformis,,Deciduous
+CT,CTSP,CTSP,Catalpa speciosa,,Deciduous
+CE,CEOC,CEOC,Celtis occidentalis,,Deciduous
+CD,CDJA,CDJA,Cercidiphyllum japonicum,,Deciduous
+CE,CECA,CECA,Cercis canadensis,,Deciduous
+CO,COAL,COAL,Cornus alternifolia,,Deciduous
+CO,COSA,COSA,Cornus sanquinea,,Deciduous
+CT,CTCO,CTCO,Cotinus coggygria,,Deciduous
+CG,CG,CG,Crataegus,,Deciduous
+CG,CGPU,CGPU,Crataegus punctata,,Deciduous
+CG,CGMO,CGMO,Crataegus x mordensis,,Deciduous
+CP,CPCA,CPCA,Cupressus cashmeriana,,Conifer
+EL,ELAN,ELAN,Elaeagnus angustifolia,,Deciduous
+EU,EUAL,EUAL,Euonymus alatus,,Deciduous
+EU,EUEU,EUEU,Euonymus europaeus,,Deciduous
+FA,FAGR,FAGR,Fagus Grandifolia,,Deciduous
+FR,FRAM,FRAM,Fraxinus americana,,Deciduous
+FR,FRPE,FRPE,Fraxinus pennsylvanica,,Deciduous
+FR,FRPE,FRPEMS,Fraxinus pennsylvanica 'Marshall Seedless',,Deciduous
+FR,FRPE,FRPESU,Fraxinus pennsylvanica 'Summit',,Deciduous
+FR,FRPR,FRPR,Fraxinus profunda,,Deciduous
+GI,GIBI,GIBI,Ginkgo biloba,,Deciduous
+GI,GIBI,GIBIAG,Ginkgo biloba 'Autumn Gold',,Deciduous
+GL,GLTR,GLTR,Gleditsia triacanthos,,Deciduous
+GL,GLTR,GLTRNA,Gleditsia triacanthos 'Northern Acclaim',,Deciduous
+GL,GLTR,GLTRSH,Gleditsia triacanthos 'Shademaster',,Deciduous
+GL,GLTR,GLTRSK,Gleditsia triacanthos 'Skyline',,Deciduous
+GL,GLTR,GLTRIN,Gleditsia triacanthos var. inermis,,Deciduous
+GY,GYDI,GYDI,Gymnocladus dioicus,,Deciduous
+HE,HEMI,HEMI,Heptacodium miconioides,,Deciduous
+HY,HY,HY,Hydrangea x,,Deciduous
+HY,HYAR,HYAR,Hydrangea_arborescens,,Deciduous
+HY,HYPA,HYPA,Hydrangea_peniculata,,Deciduous
+JU,JUCI,JUCI,Juglans cinerea,,Deciduous
+JU,JUNI,JUNI,Juglans nigra,,Deciduous
+JU,JUVI,JUVI,Juniperus virginiana,,Conifer
+LA,LADE,LADE,Larix decidua,,Conifer
+LA,LALA,LALA,Larix laricina,,Conifer
+LI,LIVU,LIVU,Ligustrum vulgare,,Deciduous
+LO,LOPE,LOPE,Lonicera periclymenum,,Deciduous
+MG,MGSO,MGXXSO,Magnolia × soulangeana,,Deciduous
+MA,MAST,MAST,Magnolia stellata,,Deciduous
+MA,MA,MA,Magnolia x ,,Deciduous
+MA,MADA,MAXXDA,Magnolia x 'Daybreak',,Deciduous
+MA,MAKO,MAKO,Magnolia_kobus,,Deciduous
+MA,MAIO,MAIO,Malus ioensis,,Deciduous
+MA,MAPR,MAPRRI,Malus prunifolia 'Rinki',,Deciduous
+MA,MASY,MASY,Malus sylvestris,,Deciduous
+MA,MARO,MAXXRO,Malus x 'Royalty',,Deciduous
+MA,MATH,MAXXTH,Malus x 'Thunderchild',,Deciduous
+MA,MASS,MAXXSS,Malus_x_'Spring_Snow',,Deciduous
+MO,MOAL,MOAL,Morus alba,,Deciduous
+MO,MORU,MORU,Morus rubra,,Deciduous
+OS,OSVI,OSVI,Ostrya virginiana,,Deciduous
+PI,PIAB,PIAB,Picea abies,,Conifer
+PI,PIGL,PIGL,Picea glauca,,Conifer
+PI,PIMA,PIMA,Picea mariana,,Conifer
+PI,PIPU,PIPU,Picea pungens,,Conifer
+PI,PIRU,PIRU,Picea rubens,,Conifer
+PI,PIBA,PIBA,Pinus banksiana,,Conifer
+PN,PNNI,PNNI,Pinus nigra,,Conifer
+PN,PNNI,PNNIAU,Pinus nigra 'Austriaca',,Conifer
+PN,PNRE,PNRE,Pinus resinosa,,Conifer
+PN,PNST,PNST,Pinus strobus,,Conifer
+PN,PNSY,PNSY,Pinus sylvestris,,Conifer
+PO,PODE,PODE,Populus deltoides,,Deciduous
+PO,PONI,PONI,Populus Nigra,,Deciduous
+PO,POCA,POCA,Populus x canadensis,,Deciduous
+PR,PRAV,PRAV,Prunus avium ,,Deciduous
+PR,PRCE,PRCE,Prunus cerasifera,,Deciduous
+PR,PRCR,PRCR,Prunus cerasus,,Deciduous
+PR,PRDO,PRDO,Prunus domestica,,Deciduous
+PR,PRPE,PRPE,Prunus pensylvanica,,Deciduous
+PR,PRVI,PRVI,Prunus virginiana,,Deciduous
+PR,PR,PR,Prunus x ,,Deciduous
+PY,PYCA,PYCACH,Pyrus calleryana 'Glen's Form (Chantecleer),,Deciduous
+QU,QUBI,QUBI,Quercus bicolor,,Deciduous
+QU,QUMA,QUMA,Quercus macrocarpa,,Deciduous
+QU,QURO,QURO,Quercus robur,,Deciduous
+QU,QURO,QUROFA,Quercus robur 'Fastigiata',,Deciduous
+QU,QURU,QURU,Quercus rubra,,Deciduous
+RH,RHCA,RHCA,Rhamnus cathartica,,Deciduous
+RH,RHAR,RHAR,Rhus aromatica,,Deciduous
+RH,RHGL,RHGL,Rhus glabra,,Deciduous
+RH,RHTY,RHTY,Rhus typhina,,Deciduous
+RO,ROPS,ROPS,Robinia pseudoacacia,,Deciduous
+RO,ROCA,ROCA,Rosa canina,,Deciduous
+SA,SAAL,SAAL,Salix alba,,Deciduous
+SA,SADI,SADI,Salix discolor,,Deciduous
+SA,SAHU,SAHU,Salix humboldtiana,,Deciduous
+SA,SACA,SACA,Sambucus canadensis,,Deciduous
+SO,SOAM,SOAM,Sorbus americana ,,Deciduous
+SO,SOAU,SOAU,Sorbus aucuparia,,Deciduous
+SO,SOTH,SOXXTH,Sorbus_x_thuringiaca,,Deciduous
+SY,SYPU,SYPU,Syringa pubescens,,Deciduous
+SY,SYRE,SYRE,Syringa reticulata,,Deciduous
+SY,SYRE,SYREIS,Syringa reticulata 'Ivory Silk',,Deciduous
+SY,SYVU,SYVU,Syringa vulgaris,,Deciduous
+TA,TACA,TACA,Taxus canadensis,,Conifer
+TH,THOC,THOC,Thuja occidentalis,,Conifer
+TI,TIAM,TIAM,Tilia americana,,Deciduous
+TI,TIAM,TIAMHE,Tilia americana var. heterophylla,,Deciduous
+TI,TICO,TICO,Tilia cordata,,Deciduous
+TI,TICO,TICOGL,Tilia cordata 'Glenleven',,Deciduous
+TI,TICO,TICOGR,Tilia cordata 'Greenspire',,Deciduous
+TI,TICO,TICOSH,Tilia cordata 'Sheridan',,Deciduous
+TS,TSCA,TSCA,Tsuga caroliana ,,Conifer
+UL,UL,UL,Ulmus,,Deciduous
+UL,ULAM,ULAM,Ulmus americana,,Deciduous
+UL,ULDA,ULDADI,Ulmus davidiana 'Discovery',,Deciduous
+UL,ULLA,ULLA,Ulmus laevis,,Deciduous
+UL,ULMI,ULMI,Ulmus minor Mill.,,Deciduous
+UL,ULPU,ULPU,Ulmus pumila,,Deciduous
+UL,ULPU,ULPUPR,Ulmus pumila 'Park Royal',,Deciduous
+UL,ULRU,ULRU,Ulmus rubra,,Deciduous
+UL,ULCA,ULXXCA,Ulmus X 'Cathedral',,Deciduous
+UL,ULHO,ULXXHO,Ulmus x 'Homestead',,Deciduous
+UL,ULMG,ULXXMG,Ulmus x 'Morton Glossy' (Triumph TM),,Deciduous
+UL,ULMO,ULXXMO,Ulmus x 'Morton' (Accolade TM),,Deciduous
+UL,ULHO,ULHOPI,Ulmus x hollandica 'Pioneer',,Deciduous
+UL,ULNH,ULXXNH,Ulmus x New Horizon,,Deciduous
+VI,VIAC,VIAC,Viburnum acerifolium,,Deciduous
+WE,WEFL,WEFL,Weigela Florida,,Deciduous
+ZE,ZESE,ZESE,Weigela Florida,,Deciduous
+ZE,ZESE,ZESEGV,Zelkova serrata 'Green Vase',,Deciduous

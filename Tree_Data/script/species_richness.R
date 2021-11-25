@@ -1,5 +1,3 @@
-total.species <- read.csv("output/Dawson.Trees.With.Origin.csv")
-str(total.species)
 
 library(tidyr)
 library(tidyverse)

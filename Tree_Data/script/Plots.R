@@ -1,49 +1,47 @@
-meta <- read.csv("output/meta.analysis.csv")
+meta <- read.csv("output/dawson.meta.analysis.csv")
 View(meta)
 library(ggplot2)
+library(gridExtra)
 
 
 meta.SLL <- subset(meta, Region=="SLL")
 meta.ETF <- subset(meta, Region=="ETF")
 
-SLL <- ggplot(meta.SLL, aes(GS.Type, Proportion_ABUND, fill=GS.Type)) +
+SLL <- ggplot(meta.SLL, aes(Site.Type, Proportion_ABUND, fill=Site.Type)) +
   geom_boxplot()+
   geom_point() +
   ggtitle("St Lawrence Lowlands") +
   labs(x="Land Use Type", y="Proportion of Native Trees", title="St Lawrence Lowlands")+
-  theme_classic() 
+  theme(legend.position = "none", axis.title = element_text(face= "bold", size= 20), axis.text.x = element_text(size= 18), axis.text.y = element_text(size= 18))
+
   
-  
-ETF <- ggplot(meta.ETF, aes(GS.Type, Proportion_ABUND, fill=GS.Type)) +
+ETF <- ggplot(meta.ETF, aes(Site.Type, Proportion_ABUND, fill=Site.Type)) +
     geom_boxplot()+
     geom_point() +
-    ggtitle("St Lawrence Lowlands") +
+    ggtitle("Eastern Temperate Forest") +
     labs(x="Land Use Type", y="Proportion of Native Trees", title="Eastern Temperate Forest")+
-    theme_classic() 
-
-install.packages("gridExtra")
-library(gridExtra)
-
+  theme( legend.position = "none", axis.title = element_text(face= "bold", size= 20), axis.text.x = element_text(size= 18), axis.text.y = element_text(size= 18))
+ETF
 grid.arrange(SLL, ETF, ncol=2)
 ggsave("output/Abund_Proportion_Boxplot.png")
 
 #
 
-SLL <- ggplot(meta.SLL, aes(GS.Type, Proportion_RICH, fill=GS.Type)) +
+SLL <- ggplot(meta.SLL, aes(Site.Type, Proportion_RICH, fill=Site.Type)) +
   geom_boxplot()+
   geom_point() +
   ggtitle("St Lawrence Lowlands") +
   labs(x="Land Use Type", y="Proportion of Native Species", title="St Lawrence Lowlands")+
-  theme_classic() 
+  theme(legend.position="none", axis.title = element_text(face= "bold", size= 20), axis.text.x = element_text(size= 18), axis.text.y = element_text(size= 18))
 
 
-ETF <- ggplot(meta.ETF, aes(GS.Type, Proportion_RICH, fill=GS.Type)) +
+ETF <- ggplot(meta.ETF, aes(Site.Type, Proportion_RICH, fill=Site.Type)) +
   geom_boxplot()+
   geom_point() +
   ggtitle("St Lawrence Lowlands") +
   labs(x="Land Use Type", y="Proportion of Native Species", title="Eastern Temperate Forest")+
-  theme_classic() 
-
+  theme( legend.position="none",axis.title = element_text(face= "bold", size= 20), axis.text.x = element_text(size= 18), axis.text.y = element_text(size= 18))
+ETF
 grid.arrange(SLL, ETF, ncol=2)
 ggsave("output/Abund_Proportion_Boxplot.png")
 
